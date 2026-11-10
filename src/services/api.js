@@ -927,10 +927,10 @@ export const paymentsAPI = {
    * @param {string} orderId - Order ID
    * @returns {Promise} Payment initiation response with redirectUrl
    */
-  initiatePaynow: async (orderId) => {
+  initiatePaynow: async (orderId, paymentToken) => {
     try {
       
-      const response = await api.post('/payments/paynow/initiate', { orderId });
+      const response = await api.post('/payments/paynow/initiate', { orderId, paymentToken });
       
       
       return response;
@@ -979,9 +979,9 @@ export const paymentsAPI = {
    * @param {string} orderId - Order ID
    * @returns {Promise} COD confirmation
    */
-  processCOD: async (orderId) => {
+  processCOD: async (orderId, paymentToken) => {
     try {
-      const response = await api.post('/payments/cash-on-delivery', { orderId });
+      const response = await api.post('/payments/cash-on-delivery', { orderId, paymentToken });
       return response;
     } catch (error) {
       console.error('❌ COD process failed:', error);
@@ -994,9 +994,9 @@ export const paymentsAPI = {
    * @param {string} orderId - Order ID
    * @returns {Promise} Collection confirmation
    */
-  processCollection: async (orderId) => {
+  processCollection: async (orderId, paymentToken) => {
     try {
-      const response = await api.post('/payments/collection', { orderId });
+      const response = await api.post('/payments/collection', { orderId, paymentToken });
       return response;
     } catch (error) {
       console.error('❌ Collection process failed:', error);
