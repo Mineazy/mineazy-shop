@@ -6,6 +6,7 @@ import Loading from '../components/Common/Loading';
 import { ErrorMessage } from '../components/Common/ErrorBoundary';
 import { useBlogPost } from '../hooks/useBlog';
 import Seo, { BlogPostJsonLd, BreadcrumbJsonLd } from '../components/Common/Seo';
+import BlogEngagement from '../components/Blog/BlogEngagement';
 import {
   getBlogTitle,
   getBlogExcerpt,
@@ -298,6 +299,9 @@ const BlogPost = () => {
               )}
             </div>
           </div>
+
+          {/* Likes, sharing and comments */}
+          <BlogEngagement post={post} />
 
           {/* Author Bio */}
           {author && (
