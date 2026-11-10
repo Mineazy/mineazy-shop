@@ -10,7 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import Loading from '../components/Common/Loading';
 import productPlaceholder from '../assets/prodduct-placeholder.webp';
 
-const API_URL = 'https://mining-equipment-backend.onrender.com/api';
+import { API_BASE_URL as API_URL } from '../services/api';
 
 const OrderSuccess = () => {
   const { orderId } = useParams();

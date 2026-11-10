@@ -5,6 +5,9 @@ import axios from 'axios';
 const BASE_URL = 'https://mineazy.co.zw/api';
 const API_ORIGIN = BASE_URL.replace(/\/api\/?$/, '');
 
+// Single source of truth for pages that call the API with fetch()
+export const API_BASE_URL = BASE_URL;
+
 const normalizeImageUrl = (url) => {
   if (!url || typeof url !== 'string') return url;
   if (

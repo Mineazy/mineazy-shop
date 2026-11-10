@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../components/Common/Loading';
 import productPlaceholder from '../assets/prodduct-placeholder.webp';
 
-const API_URL = 'https://mining-equipment-backend.onrender.com/api';
+import { API_BASE_URL as API_URL } from '../services/api';
 
 const readInvoicePdfBlob = async (response) => {
   if (!response.ok) {
