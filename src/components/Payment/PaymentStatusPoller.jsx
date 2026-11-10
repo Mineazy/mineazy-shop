@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CheckCircle, XCircle, Loader2, AlertTriangle, RefreshCw } from 'lucide-react';
 
-const API_URL = 'https://mining-equipment-backend.onrender.com/api';
+import { API_BASE_URL as API_URL } from '../../services/api';
 
 const PaymentStatusPoller = () => {
   const [searchParams] = useSearchParams();

@@ -9,7 +9,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import productPlaceholder from '../assets/prodduct-placeholder.webp';
 
-const API_URL = 'https://mining-equipment-backend.onrender.com/api';
+import { API_BASE_URL as API_URL } from '../services/api';
 
 const PROVINCES = [
   'Harare', 'Bulawayo', 'Manicaland', 'Mashonaland Central',
@@ -354,6 +354,8 @@ const Checkout = () => {
         throw new Error('Invalid order response from server');
       }
 
+      // Proves ownership of this order to /api/payments/* (required for guests)
+      const paymentToken = responseData.paymentToken;
 
       // Handle payment processing
   if (formData.paymentMethod === 'paynow') {
@@ -362,7 +364,7 @@ const Checkout = () => {
     const paymentResponse = await fetch(`${API_URL}/payments/paynow/initiate`, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify({ orderId: order._id })
+      body: JSON.stringify({ orderId: order._id, paymentToken })
     });
 
     if (paymentResponse.ok) {
@@ -412,7 +414,7 @@ const Checkout = () => {
           await fetch(`${API_URL}/payments/cash-on-delivery`, {
             method: 'POST',
             headers: headers,
-            body: JSON.stringify({ orderId: order._id })
+            body: JSON.stringify({ orderId: order._id, paymentToken })
           });
         } catch (codError) {
           console.warn('⚠️ COD processing error (non-critical):', codError);
@@ -422,7 +424,7 @@ const Checkout = () => {
           await fetch(`${API_URL}/payments/collection`, {
             method: 'POST',
             headers: headers,
-            body: JSON.stringify({ orderId: order._id })
+            body: JSON.stringify({ orderId: order._id, paymentToken })
           });
         } catch (collectionError) {
           console.warn('⚠️ Collection processing error (non-critical):', collectionError);
